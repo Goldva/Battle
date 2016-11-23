@@ -4,14 +4,12 @@ import interfaces.WarriorClass;
 
 import java.util.Random;
 
-/**
- * Created by ermakov on 21.11.2016.
- */
 public class Archer implements WarriorClass {
     private String nameSquad;
     private int myHealth = 100;
 
     private Random random = new Random(70);
+
     @Override
     public int attack() {
         return random.nextInt(91);

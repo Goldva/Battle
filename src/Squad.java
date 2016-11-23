@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-public class Squad implements Cloneable{
+public class Squad implements Cloneable {
     private String nameSquad;
     private List<WarriorClass> listSquads = new ArrayList<>();
     private Random random = new Random();
@@ -17,10 +17,10 @@ public class Squad implements Cloneable{
         this.nameSquad = nameSquad;
     }
 
-    public void createDefaultSquads(){
+    public void createDefaultSquads() {
         for (int i = 0; i < 5; i++) {
             int numberWarrior = random.nextInt(3);
-            switch (numberWarrior){
+            switch (numberWarrior) {
                 case 0:
                     addWarriors(new Archer());
                     break;
@@ -34,16 +34,16 @@ public class Squad implements Cloneable{
         }
     }
 
-    public void addWarriors(WarriorClass warrior){
+    public void addWarriors(WarriorClass warrior) {
         warrior.setSquadName(this.nameSquad);
         this.listSquads.add(warrior);
     }
 
-    public WarriorClass getRandomWarrior(){
-        WarriorClass warrior = null;
+    public WarriorClass getRandomWarrior() {
+        WarriorClass warrior;
 
         List<WarriorClass> warriorAlive = new LinkedList<>();
-        for (WarriorClass nextWarrior : listSquads){
+        for (WarriorClass nextWarrior : listSquads) {
             if (nextWarrior.isAlive())
                 warriorAlive.add(nextWarrior);
         }
@@ -53,9 +53,9 @@ public class Squad implements Cloneable{
         return warrior;
     }
 
-    public boolean hasAliveWarriors(){
-        for (WarriorClass warrior : listSquads){
-            if(warrior.isAlive())
+    public boolean hasAliveWarriors() {
+        for (WarriorClass warrior : listSquads) {
+            if (warrior.isAlive())
                 return true;
         }
         return false;
@@ -72,11 +72,11 @@ public class Squad implements Cloneable{
 
         for (WarriorClass warrior : this.listSquads) {
             if (warrior instanceof Archer) {
-                newSquad.addWarriors(((Archer)warrior).clone());
-            }else if (warrior instanceof Warrior) {
-                newSquad.addWarriors(((Warrior)warrior).clone());
-            }else if (warrior instanceof Viking) {
-                newSquad.addWarriors(((Viking)warrior).clone());
+                newSquad.addWarriors(((Archer) warrior).clone());
+            } else if (warrior instanceof Warrior) {
+                newSquad.addWarriors(((Warrior) warrior).clone());
+            } else if (warrior instanceof Viking) {
+                newSquad.addWarriors(((Viking) warrior).clone());
             }
         }
         return newSquad;
