@@ -9,11 +9,11 @@ public class Warrior implements WarriorClass {
     private int myDamage = 50;
     private int myHealth = 160;
 
-    private Random random = new Random(40);
+    private Random random = new Random(myDamage - 10);
 
     @Override
     public int attack() {
-        return random.nextInt(61);
+        return random.nextInt(myDamage + 11);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class Warrior implements WarriorClass {
 
     @Override
     public Warrior clone() throws CloneNotSupportedException {
-        return new Warrior();
+        return (Warrior)super.clone();
     }
 
 }

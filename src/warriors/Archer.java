@@ -6,13 +6,14 @@ import java.util.Random;
 
 public class Archer implements WarriorClass {
     private String nameSquad;
+    private int myDamage = 80;
     private int myHealth = 100;
 
-    private Random random = new Random(70);
+    private Random random = new Random(myDamage - 10);
 
     @Override
     public int attack() {
-        return random.nextInt(91);
+        return random.nextInt(myDamage + 11);
     }
 
     @Override
@@ -37,8 +38,9 @@ public class Archer implements WarriorClass {
                 "Отряд: " + this.nameSquad;
     }
 
+
     @Override
     public Archer clone() throws CloneNotSupportedException {
-        return new Archer();
+        return (Archer)super.clone();
     }
 }

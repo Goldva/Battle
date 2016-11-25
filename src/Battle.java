@@ -2,13 +2,25 @@ import Utils.DateHelper;
 import interfaces.WarriorClass;
 
 public class Battle {
-    public static void main(String[] args) {
-        Squad squadOne = new Squad("Аргонавты");
-        Squad squadTwo = new Squad("Сакура");
-        squadOne.createDefaultSquads();
-        squadTwo.createDefaultSquads();
+    private Squad squadOne;
+    private Squad squadTwo;
+    private DateHelper dateHelper;
 
-        DateHelper dateHelper = new DateHelper();
+    public static void main(String[] args) {
+        Battle battle = new Battle();
+        battle.dateHelper = new DateHelper();
+        battle.squadOne = new Squad("Аргонавты");
+        battle.squadTwo = new Squad("Сакура");
+        battle.squadOne.createDefaultSquads();
+        battle.squadTwo.createDefaultSquads();
+
+        System.out.println(battle.battleProgress());
+
+        System.out.println(battle.dateHelper.getFormattedDiff());
+    }
+
+
+    private String battleProgress() {
         System.out.println("Начало поединка " + dateHelper.getFormattedStartDate());
 
         boolean queueAttack = true;
@@ -24,13 +36,10 @@ public class Battle {
         }
 
         if (squadOne.hasAliveWarriors())
-            System.out.println("Победил " + squadOne.toString());
+            return "Победил " + squadOne.toString();
         else
-            System.out.println("Победил " + squadTwo.toString());
-
-        System.out.println(dateHelper.getFormattedDiff());
+            return "Победил " + squadTwo.toString();
     }
-
 
     public static void battleSoldiers(WarriorClass soldierOne, WarriorClass soldierTwo) {
         soldierTwo.takeDamage(soldierOne.attack());

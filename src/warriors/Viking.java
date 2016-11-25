@@ -9,11 +9,11 @@ public class Viking implements WarriorClass {
     private int myDamage = 120;
     private int myHealth = 100;
 
-    private Random random = new Random(100);
+    private Random random = new Random(myDamage - 20);
 
     @Override
     public int attack() {
-        return random.nextInt(141);
+        return random.nextInt(myDamage + 21);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class Viking implements WarriorClass {
 
     @Override
     public Viking clone() throws CloneNotSupportedException {
-        return new Viking();
+        return (Viking)super.clone();
     }
 
 }

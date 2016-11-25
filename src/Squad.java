@@ -67,18 +67,28 @@ public class Squad implements Cloneable {
     }
 
     @Override
-    protected Squad clone() throws CloneNotSupportedException {
-        Squad newSquad = new Squad(this.nameSquad + "(копия)");
+    public Squad clone() throws CloneNotSupportedException {
+        Squad newSquad = (Squad)super.clone();
 
-        for (WarriorClass warrior : this.listSquads) {
-            if (warrior instanceof Archer) {
-                newSquad.addWarriors(((Archer) warrior).clone());
-            } else if (warrior instanceof Warrior) {
-                newSquad.addWarriors(((Warrior) warrior).clone());
-            } else if (warrior instanceof Viking) {
-                newSquad.addWarriors(((Viking) warrior).clone());
+        for (WarriorClass soldier : this.listSquads) {
+            if (soldier instanceof Archer) {
+                Archer archer = ((Archer) soldier).clone();
+                archer.setSquadName(newSquad.getNameSquad());
+                newSquad.addWarriors(archer);
+            } else if (soldier instanceof Warrior) {
+                Warrior warrior = ((Warrior) soldier).clone();
+                warrior.setSquadName(newSquad.getNameSquad());
+                newSquad.addWarriors(warrior);
+            } else if (soldier instanceof Viking) {
+                Viking viking = ((Viking) soldier).clone();
+                viking.setSquadName(newSquad.getNameSquad());
+                newSquad.addWarriors(viking);
             }
         }
         return newSquad;
+    }
+
+    public String getNameSquad() {
+        return nameSquad;
     }
 }
