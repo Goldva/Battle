@@ -23,9 +23,9 @@ public class Squad implements Cloneable {
     }
 
     public void createDefaultSquads() {
-        String[] names = {"Арагорн","Рогнар","Леголас","Гарт","Марис","Робин","Дореан","Лис"};
+        String[] names = {"Арагорн", "Рогнар", "Леголас", "Гарт", "Марис", "Робин", "Дореан", "Лис"};
         String name;
-            for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++) {
             int numberWarrior = random.nextInt(3);
             switch (numberWarrior) {
                 case 0:
