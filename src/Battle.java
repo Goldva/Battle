@@ -19,6 +19,9 @@ public class Battle {
         System.out.println(battle.dateHelper.getFormattedDiff());
     }
 
+    private void battleSoldiers(WarriorClass soldierOne, WarriorClass soldierTwo) {
+        soldierTwo.takeDamage(soldierOne.attack());
+    }
 
     private String battleProgress() {
         System.out.println("Начало поединка " + dateHelper.getFormattedStartDate());
@@ -39,9 +42,5 @@ public class Battle {
             return "Победил " + squadOne.toString();
         else
             return "Победил " + squadTwo.toString();
-    }
-
-    public static void battleSoldiers(WarriorClass soldierOne, WarriorClass soldierTwo) {
-        soldierTwo.takeDamage(soldierOne.attack());
     }
 }

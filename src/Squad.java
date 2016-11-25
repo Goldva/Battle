@@ -9,33 +9,43 @@ import java.util.List;
 import java.util.Random;
 
 public class Squad implements Cloneable {
-    private String nameSquad;
+    private String squadName;
     private List<WarriorClass> listSquads = new ArrayList<>();
     private Random random = new Random();
 
     public Squad(String nameSquad) {
-        this.nameSquad = nameSquad;
+        this.squadName = nameSquad;
+    }
+
+    public Squad(String squadName, List<WarriorClass> listSquads) {
+        this.squadName = squadName;
+        this.listSquads = listSquads;
     }
 
     public void createDefaultSquads() {
-        for (int i = 0; i < 5; i++) {
+        String[] names = {"Арагорн","Рогнар","Леголас","Гарт","Марис","Робин","Дореан","Лис"};
+        String name;
+            for (int i = 0; i < 5; i++) {
             int numberWarrior = random.nextInt(3);
             switch (numberWarrior) {
                 case 0:
-                    addWarriors(new Archer());
+                    name = names[random.nextInt(names.length)];
+                    addWarriors(new Archer(name));
                     break;
                 case 1:
-                    addWarriors(new Warrior());
+                    name = names[random.nextInt(names.length)];
+                    addWarriors(new Warrior(name));
                     break;
                 case 2:
-                    addWarriors(new Viking());
+                    name = names[random.nextInt(names.length)];
+                    addWarriors(new Viking(name));
                     break;
             }
         }
     }
 
-    public void addWarriors(WarriorClass warrior) {
-        warrior.setSquadName(this.nameSquad);
+    private void addWarriors(WarriorClass warrior) {
+        warrior.setSquadName(this.squadName);
         this.listSquads.add(warrior);
     }
 
@@ -63,32 +73,32 @@ public class Squad implements Cloneable {
 
     @Override
     public String toString() {
-        return "Отряд: " + nameSquad;
+        return "Отряд: " + squadName;
     }
 
     @Override
     public Squad clone() throws CloneNotSupportedException {
-        Squad newSquad = (Squad)super.clone();
+        Squad newSquad = (Squad) super.clone();
 
         for (WarriorClass soldier : this.listSquads) {
             if (soldier instanceof Archer) {
                 Archer archer = ((Archer) soldier).clone();
-                archer.setSquadName(newSquad.getNameSquad());
+                archer.setSquadName(newSquad.getSquadName());
                 newSquad.addWarriors(archer);
             } else if (soldier instanceof Warrior) {
                 Warrior warrior = ((Warrior) soldier).clone();
-                warrior.setSquadName(newSquad.getNameSquad());
+                warrior.setSquadName(newSquad.getSquadName());
                 newSquad.addWarriors(warrior);
             } else if (soldier instanceof Viking) {
                 Viking viking = ((Viking) soldier).clone();
-                viking.setSquadName(newSquad.getNameSquad());
+                viking.setSquadName(newSquad.getSquadName());
                 newSquad.addWarriors(viking);
             }
         }
         return newSquad;
     }
 
-    public String getNameSquad() {
-        return nameSquad;
+    public String getSquadName() {
+        return squadName;
     }
 }
