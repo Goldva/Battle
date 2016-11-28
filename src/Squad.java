@@ -82,7 +82,7 @@ public class Squad implements Cloneable {
         Squad newSquad = (Squad) super.clone();
 
         for (Character soldier : this.listSquads) {
-            Character character =  soldier.clone();
+            Character character =  (Character)soldier.clone();
             character.setSquadName(newSquad.getSquadName());
             newSquad.addWarriors(character);
         }

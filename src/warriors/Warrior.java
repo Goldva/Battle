@@ -40,8 +40,8 @@ public class Warrior implements Character {
     }
 
     @Override
-    public Warrior clone() throws CloneNotSupportedException {
-        return (Warrior) super.clone();
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     public String getMyName() {

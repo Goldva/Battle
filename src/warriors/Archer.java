@@ -41,8 +41,8 @@ public class Archer implements Character {
 
 
     @Override
-    public Archer clone() throws CloneNotSupportedException {
-        return (Archer) super.clone();
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     public String getMyName() {

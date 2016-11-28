@@ -39,8 +39,8 @@ public class Viking implements Character {
     }
 
     @Override
-    public Viking clone() throws CloneNotSupportedException {
-        return (Viking) super.clone();
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     public String getMyName() {
