@@ -1,6 +1,6 @@
 package interfaces;
 
-public interface WarriorClass extends Cloneable {
+public interface Character extends Cloneable {
     int attack();
 
     void takeDamage(int damage);

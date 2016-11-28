@@ -1,4 +1,4 @@
-import interfaces.WarriorClass;
+import interfaces.Character;
 import warriors.Archer;
 import warriors.Viking;
 import warriors.Warrior;
@@ -10,14 +10,14 @@ import java.util.Random;
 
 public class Squad implements Cloneable {
     private String squadName;
-    private List<WarriorClass> listSquads = new ArrayList<>();
+    private List<Character> listSquads = new ArrayList<>();
     private Random random = new Random();
 
-    public Squad(String nameSquad) {
-        this.squadName = nameSquad;
+    public Squad(String squadName) {
+        this.squadName = squadName;
     }
 
-    public Squad(String squadName, List<WarriorClass> listSquads) {
+    public Squad(String squadName, List<Character> listSquads) {
         this.squadName = squadName;
         this.listSquads = listSquads;
     }
@@ -44,16 +44,16 @@ public class Squad implements Cloneable {
         }
     }
 
-    private void addWarriors(WarriorClass warrior) {
+    private void addWarriors(Character warrior) {
         warrior.setSquadName(this.squadName);
         this.listSquads.add(warrior);
     }
 
-    public WarriorClass getRandomWarrior() {
-        WarriorClass warrior;
+    public Character getRandomWarrior() {
+        Character warrior;
 
-        List<WarriorClass> warriorAlive = new LinkedList<>();
-        for (WarriorClass nextWarrior : listSquads) {
+        List<Character> warriorAlive = new LinkedList<>();
+        for (Character nextWarrior : listSquads) {
             if (nextWarrior.isAlive())
                 warriorAlive.add(nextWarrior);
         }
@@ -64,7 +64,7 @@ public class Squad implements Cloneable {
     }
 
     public boolean hasAliveWarriors() {
-        for (WarriorClass warrior : listSquads) {
+        for (Character warrior : listSquads) {
             if (warrior.isAlive())
                 return true;
         }
@@ -80,7 +80,7 @@ public class Squad implements Cloneable {
     public Squad clone() throws CloneNotSupportedException {
         Squad newSquad = (Squad) super.clone();
 
-        for (WarriorClass soldier : this.listSquads) {
+        for (Character soldier : this.listSquads) {
             if (soldier instanceof Archer) {
                 Archer archer = ((Archer) soldier).clone();
                 archer.setSquadName(newSquad.getSquadName());

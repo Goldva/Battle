@@ -1,10 +1,10 @@
 package warriors;
 
-import interfaces.WarriorClass;
+import interfaces.Character;
 
 import java.util.Random;
 
-public class Archer implements WarriorClass {
+public class Archer implements Character {
     private String squadName;
     private String myName;
     private int myDamage = 80;

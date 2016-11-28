@@ -1,5 +1,5 @@
 import Utils.DateHelper;
-import interfaces.WarriorClass;
+import interfaces.Character;
 
 public class Battle {
     private Squad squadOne;
@@ -19,7 +19,7 @@ public class Battle {
         System.out.println(battle.dateHelper.getFormattedDiff());
     }
 
-    private void battleSoldiers(WarriorClass soldierOne, WarriorClass soldierTwo) {
+    private void battleSoldiers(Character soldierOne, Character soldierTwo) {
         soldierTwo.takeDamage(soldierOne.attack());
     }
 
