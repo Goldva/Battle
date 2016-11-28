@@ -9,4 +9,6 @@ public interface Character extends Cloneable {
 
     void setSquadName(String name);
 
-}
+    Character clone() throws CloneNotSupportedException;
+
+    }

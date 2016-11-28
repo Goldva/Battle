@@ -71,6 +71,7 @@ public class Squad implements Cloneable {
         return false;
     }
 
+
     @Override
     public String toString() {
         return "Отряд: " + squadName;
@@ -81,19 +82,9 @@ public class Squad implements Cloneable {
         Squad newSquad = (Squad) super.clone();
 
         for (Character soldier : this.listSquads) {
-            if (soldier instanceof Archer) {
-                Archer archer = ((Archer) soldier).clone();
-                archer.setSquadName(newSquad.getSquadName());
-                newSquad.addWarriors(archer);
-            } else if (soldier instanceof Warrior) {
-                Warrior warrior = ((Warrior) soldier).clone();
-                warrior.setSquadName(newSquad.getSquadName());
-                newSquad.addWarriors(warrior);
-            } else if (soldier instanceof Viking) {
-                Viking viking = ((Viking) soldier).clone();
-                viking.setSquadName(newSquad.getSquadName());
-                newSquad.addWarriors(viking);
-            }
+            Character character =  soldier.clone();
+            character.setSquadName(newSquad.getSquadName());
+            newSquad.addWarriors(character);
         }
         return newSquad;
     }
