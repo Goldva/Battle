@@ -1,10 +1,14 @@
+import sun.reflect.Reflection;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class UserInterface extends JFrame {
     public UserInterface() {
         super("Битва");
-
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        ActionListener actionListener = new ActionListener() {
 //            public void actionPerformed(ActionEvent e) {
 //                JComboBox box = (JComboBox)e.getSource();
@@ -20,21 +24,22 @@ public class UserInterface extends JFrame {
     }
 
     public void addComponentToPane() {
-        JTextField nameSquadFirst = new JTextField("Введите имя 1-ого отряда", 20);
-        JTextField nameSquadSecond = new JTextField("Введите имя 2-ого отряда", 20);
-        JTextField warriorName = new JTextField("Введите имя война", 20);
+        JTextField nameSquadFirst = getTextField("Введите имя 1-ого отряда");
+        JTextField nameSquadSecond = getTextField("Введите имя 2-ого отряда");
+        JTextField warriorName = getTextField("Введите имя война");
 
         JTextArea listSquadFirst = new JTextArea(20, 10);
+        listSquadFirst.setEditable(false);
         JTextArea listSquadSecond = new JTextArea(20, 10);
+        listSquadSecond.setEditable(false);
+        JTextArea consoleText = new JTextArea(10, 10);
+        consoleText.setEditable(false);
 
-        JComboBox listWarriors = new JComboBox();
-        listWarriors.setName("sssss");
+        JComboBox listWarriors = getComboBox();
 
-        JButton addToFirstSquad = new JButton("Добавить в 1-ый отряд");
-        JButton addToSecondSquad = new JButton("Добавить во 2-ой отряд");
-
-        JTextArea consoleText = new JTextArea(20, 10);
-
+        JButton addToFirstSquadButton = new JButton("Добавить в 1-ый отряд");
+        JButton addToSecondSquadButton = new JButton("Добавить во 2-ой отряд");
+        JButton fightButton = new JButton("В бой!");
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -42,24 +47,28 @@ public class UserInterface extends JFrame {
         layout.setAutoCreateContainerGaps(true);
 
         layout.setHorizontalGroup(layout.createSequentialGroup()
-                .addComponent(consoleText)
-                .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(nameSquadFirst)
-                                .addComponent(listSquadFirst)
-                                .addComponent(addToFirstSquad)
-                                .addComponent(warriorName)
-                                .addComponent(listWarriors))
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(nameSquadSecond)
-                                .addComponent(listSquadSecond)
-                                .addComponent(addToSecondSquad))));
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(consoleText)
+                        .addComponent(fightButton)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                        .addComponent(nameSquadFirst)
+                                        .addComponent(listSquadFirst)
+                                        .addComponent(addToFirstSquadButton)
+                                        .addComponent(warriorName)
+                                        .addComponent(listWarriors))
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                        .addComponent(nameSquadSecond)
+                                        .addComponent(listSquadSecond)
+                                        .addComponent(addToSecondSquadButton)))));
 
-        layout.linkSize(SwingConstants.HORIZONTAL, addToFirstSquad, addToSecondSquad);
+        layout.linkSize(SwingConstants.HORIZONTAL, addToFirstSquadButton, addToSecondSquadButton);
 
         layout.setVerticalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(consoleText))
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(fightButton))
                 .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(nameSquadFirst)
@@ -72,62 +81,25 @@ public class UserInterface extends JFrame {
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(listWarriors))
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(addToFirstSquad)
-                                .addComponent(addToSecondSquad))));
+                                .addComponent(addToFirstSquadButton)
+                                .addComponent(addToSecondSquadButton))));
+    }
 
-//        layout.setHorizontalGroup(layout.createSequentialGroup()
-//                .addComponent(label)
-//                .addGroup(layout.createParallelGroup(LEADING)
-//                        .addComponent(textField)
-//                        .addGroup(layout.createSequentialGroup()
-//                                .addGroup(layout.createParallelGroup(LEADING)
-//                                        .addComponent(caseCheckBox)
-//                                        .addComponent(wholeCheckBox))
-//                                .addGroup(layout.createParallelGroup(LEADING)
-//                                        .addComponent(wrapCheckBox)
-//                                        .addComponent(backCheckBox))))
-//                .addGroup(layout.createParallelGroup(LEADING)
-//                        .addComponent(findButton)
-//                        .addComponent(cancelButton)));
+    private JTextField getTextField(String text){
+        JTextField textField = new JTextField(text, 20);
+//        ActionListener listener = e -> {
+//            JTextField field = (JTextField) e.getSource();
+//            if ((field.getText()).equals(text)){
+//                System.out.println(field.getText());
+//            }
+//        };
 //
-//        layout.linkSize(SwingConstants.HORIZONTAL, findButton, cancelButton);
-//
-//        layout.setVerticalGroup(layout.createSequentialGroup()
-//                .addGroup(layout.createParallelGroup(BASELINE)
-//                        .addComponent(label)
-//                        .addComponent(textField)
-//                        .addComponent(findButton))
-//                .addGroup(layout.createParallelGroup(LEADING)
-//                        .addGroup(layout.createSequentialGroup()
-//                                .addGroup(layout.createParallelGroup(BASELINE)
-//                                        .addComponent(caseCheckBox)
-//                                        .addComponent(wrapCheckBox))
-//                                .addGroup(layout.createParallelGroup(BASELINE)
-//                                        .addComponent(wholeCheckBox)
-//                                        .addComponent(backCheckBox)))
-//                        .addComponent(cancelButton)));
+//        textField.addActionListener(listener);
+        return textField;
+    }
 
-
-
-//        layout.setHorizontalGroup(layout.createSequentialGroup()
-//                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-//                        .addComponent(nameSquadFirst)
-//                        .addComponent(listSquadFirst))
-//                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-//                        .addComponent(nameSquadSecond)
-//                        .addComponent(listSquadSecond))
-//                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-//                        .addComponent(warriorName)
-//                        .addComponent(listWarriors))
-////                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-////                        .addComponent(addToFirstSquad)
-////                        .addComponent(addToSecondSquad))
-
-//                );
-
-
-//        layout.linkSize(SwingConstants.HORIZONTAL, addToFirstSquad, addToSecondSquad);
-
-
+    private JComboBox getComboBox(){
+        JComboBox comboBox = new JComboBox();
+        return comboBox;
     }
 }
