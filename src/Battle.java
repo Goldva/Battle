@@ -7,16 +7,17 @@ public class Battle {
     private DateHelper dateHelper;
 
     public static void main(String[] args) {
-        Battle battle = new Battle();
-        battle.dateHelper = new DateHelper();
-        battle.squadOne = new Squad("Аргонавты");
-        battle.squadTwo = new Squad("Сакура");
-        battle.squadOne.createDefaultSquads();
-        battle.squadTwo.createDefaultSquads();
-
-        System.out.println(battle.battleProgress());
-
-        System.out.println(battle.dateHelper.getFormattedDiff());
+//        Battle battle = new Battle();
+//        battle.dateHelper = new DateHelper();
+//        battle.squadOne = new Squad("Аргонавты");
+//        battle.squadTwo = new Squad("Сакура");
+//        battle.squadOne.createDefaultSquads();
+//        battle.squadTwo.createDefaultSquads();
+//
+//        System.out.println(battle.battleProgress());
+//
+//        System.out.println(battle.dateHelper.getFormattedDiff());
+        UserInterface user = new UserInterface();
     }
 
     private void battleSoldiers(Character soldierOne, Character soldierTwo) {
