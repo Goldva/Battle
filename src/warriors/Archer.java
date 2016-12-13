@@ -31,7 +31,6 @@ public class Archer implements Character {
         return myHealth >= 1;
     }
 
-
     @Override
     public String toString() {
         return "Имя бойца: " + this.getMyName() + "\n" +
@@ -44,6 +43,7 @@ public class Archer implements Character {
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
+
 
     public String getMyName() {
         return myName;
