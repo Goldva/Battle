@@ -110,7 +110,7 @@ public class UserInterface extends JFrame {
     }
 
     private JComboBox<NamesAllCharacters> getComboBox(){
-        return new JComboBox<>(NamesAllCharacters.values());
+        return new JComboBox<>(NamesAllCharacters.values());                                                //TODO: NamesAllCharacters изменить
     }
 
     private JTextArea getTextArea() {
@@ -122,7 +122,7 @@ public class UserInterface extends JFrame {
     private JButton getBtnAddWarrior(String nameBtn, JTextArea listSquad) {
         JButton btn = new JButton(nameBtn);
         btn.addActionListener(e -> {
-            String character = listWarriors.getSelectedItem().toString();
+            String character = listWarriors.getSelectedItem().toString();                                   //TODO: в контроллер
             String name = warriorName.getText();
             listSquad.append(character + " - " + name + "\n");
         });
