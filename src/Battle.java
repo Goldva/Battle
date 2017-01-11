@@ -1,8 +1,7 @@
+import Factory.FactoryCharacters;
 import Utils.DateHelper;
+import data.InfoAboutPerson;
 import interfaces.Character;
-import warriors.Archer;
-import warriors.Viking;
-import warriors.Warrior;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,22 +38,10 @@ public class Battle {
             return "Победил " + squads.get(1).toString();
     }
 
-    public void newSquads(String nameSquad, String[] warriors) {
+    public void newSquads(String nameSquad, List<InfoAboutPerson> warriors) {
         List<Character> squad = new ArrayList<>();
-        for (String warrior : warriors) {
-            String character = warrior.split(" - ")[0];
-            String nameWarrior = warrior.split(" - ")[1];
-            switch (character) {
-                case "Archer":
-                    squad.add(new Archer(nameWarrior));
-                    break;
-                case "Warrior":
-                    squad.add(new Warrior(nameWarrior));
-                    break;
-                case "Viking":
-                    squad.add(new Viking(nameWarrior));
-                    break;
-            }
+        for (InfoAboutPerson warrior : warriors) {
+            squad.add(FactoryCharacters.createCharacter(warrior));
         }
         squads.add(new Squad(nameSquad, squad));
     }

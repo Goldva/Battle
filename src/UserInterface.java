@@ -1,8 +1,11 @@
+import data.InfoAboutPerson;
 import warriors.NamesAllCharacters;
 
 import javax.swing.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserInterface extends JFrame {
     private JTextField nameSquadFirst;
@@ -133,13 +136,25 @@ public class UserInterface extends JFrame {
         JButton btn = new JButton(nameBtn);
         btn.addActionListener(e -> {
             Battle battle = new Battle();
-            battle.newSquads(nameSquadFirst.getText(), listSquadFirst.getText().split("\n"));
-            battle.newSquads(nameSquadSecond.getText(), listSquadSecond.getText().split("\n"));
+            battle.newSquads(nameSquadFirst.getText(), getListPerson(listSquadFirst.getText()));                                   //TODO: в контроллер
+            battle.newSquads(nameSquadSecond.getText(), getListPerson(listSquadSecond.getText()));
 
             consoleText.setText("Начало поединка " + battle.getDateHelper().getFormattedStartDate() + "\n");
             consoleText.append(battle.battleProgress() + "\n");
             consoleText.append(battle.getDateHelper().getFormattedDiff() + "\n");
         });
         return btn;
+    }
+
+    private List<InfoAboutPerson> getListPerson(String personsText) {
+        List<InfoAboutPerson> listPersons = new ArrayList<>();
+        String[] persons = personsText.split("\n");
+        for (String person : persons) {
+            InfoAboutPerson info = new InfoAboutPerson();
+            info.setCharacterPerson(person.split(" - ")[0]);
+            info.setNamePerson(person.split(" - ")[1]);
+            listPersons.add(info);
+        }
+        return listPersons;
     }
 }
