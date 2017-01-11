@@ -1,7 +1,6 @@
-import interfaces.Character;
-import warriors.Archer;
-import warriors.Viking;
-import warriors.Warrior;
+package com.battle;
+
+import com.battle.warriors.Character;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -13,35 +12,9 @@ public class Squad implements Cloneable {
     private List<Character> listSquads = new ArrayList<>();
     private Random random = new Random();
 
-    public Squad(String squadName) {
-        this.squadName = squadName;
-    }
-
     public Squad(String squadName, List<Character> listSquads) {
         this.squadName = squadName;
         this.listSquads = listSquads;
-    }
-
-    public void createDefaultSquads() {
-        String[] names = {"Арагорн", "Рогнар", "Леголас", "Гарт", "Марис", "Робин", "Дореан", "Лис"};
-        String name;
-        for (int i = 0; i < 5; i++) {
-            int numberWarrior = random.nextInt(3);
-            switch (numberWarrior) {
-                case 0:
-                    name = names[random.nextInt(names.length)];
-                    addWarriors(new Archer(name));
-                    break;
-                case 1:
-                    name = names[random.nextInt(names.length)];
-                    addWarriors(new Warrior(name));
-                    break;
-                case 2:
-                    name = names[random.nextInt(names.length)];
-                    addWarriors(new Viking(name));
-                    break;
-            }
-        }
     }
 
     private void addWarriors(Character warrior) {
@@ -82,7 +55,7 @@ public class Squad implements Cloneable {
         Squad newSquad = (Squad) super.clone();
 
         for (Character soldier : this.listSquads) {
-            Character character =  (Character)soldier.clone();
+            Character character = (Character) soldier.clone();
             character.setSquadName(newSquad.getSquadName());
             newSquad.addWarriors(character);
         }

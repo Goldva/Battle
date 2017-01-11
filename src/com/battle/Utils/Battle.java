@@ -1,7 +1,9 @@
-import Factory.FactoryCharacters;
-import Utils.DateHelper;
-import data.InfoAboutPerson;
-import interfaces.Character;
+package com.battle.Utils;
+
+import com.battle.Factory.FactoryCharacters;
+import com.battle.Squad;
+import com.battle.data.InfoAboutPerson;
+import com.battle.warriors.Character;
 
 import java.util.ArrayList;
 import java.util.List;

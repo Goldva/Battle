@@ -1,4 +1,4 @@
-package data;
+package com.battle.data;
 
 public class InfoAboutPerson {
     private String characterPerson;

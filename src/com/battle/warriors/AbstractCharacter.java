@@ -1,7 +1,5 @@
-package warriors;
+package com.battle.warriors;
 
-
-import interfaces.Character;
 
 import java.util.Random;
 

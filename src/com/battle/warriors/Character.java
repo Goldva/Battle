@@ -1,4 +1,4 @@
-package interfaces;
+package com.battle.warriors;
 
 public interface Character extends Cloneable {
     int attack();
@@ -7,13 +7,13 @@ public interface Character extends Cloneable {
 
     boolean isAlive();
 
-    void setSquadName(String name);
-
     Object clone() throws CloneNotSupportedException;
 
     String getMyName();
 
     String getSquadName();
+
+    void setSquadName(String name);
 
 
 }

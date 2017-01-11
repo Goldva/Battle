@@ -1,10 +1,10 @@
-package Factory;
+package com.battle.Factory;
 
-import data.InfoAboutPerson;
-import interfaces.Character;
-import warriors.Archer;
-import warriors.Viking;
-import warriors.Warrior;
+import com.battle.data.InfoAboutPerson;
+import com.battle.warriors.Archer;
+import com.battle.warriors.Character;
+import com.battle.warriors.Viking;
+import com.battle.warriors.Warrior;
 
 public class FactoryCharacters {
     public static Character createCharacter(InfoAboutPerson info) {
@@ -16,5 +16,9 @@ public class FactoryCharacters {
             return new Warrior(info.getNamePerson());
         }
         return null;
+    }
+
+    public static String[] getAllCharactersName() {
+        return new String[]{"Archer", "Viking", "Warrior"};
     }
 }

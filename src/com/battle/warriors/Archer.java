@@ -1,4 +1,4 @@
-package warriors;
+package com.battle.warriors;
 
 import java.util.Random;
 
