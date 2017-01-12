@@ -1,10 +1,9 @@
 package com.battle.controlers;
 
-import com.battle.UserInterface;
+import com.battle.view.UserInterface;
 import com.battle.data.InfoAboutPerson;
-import com.battle.pattern.factory.FactoryCharacters;
-import com.battle.pattern.observer.BattleDisplay;
-import com.battle.pattern.observer.ListenerEntryToConsole;
+import com.battle.warriors.FactoryCharacters;
+import com.battle.view.ConsoleObserver;
 import com.battle.utils.Battle;
 
 import java.util.ArrayList;
@@ -12,15 +11,20 @@ import java.util.List;
 
 public class UserInterfaceController {
 
+    private Battle battle;
+    private ConsoleObserver userInterface;
+
+    public UserInterfaceController(Battle battle) {
+        this.battle = battle;
+        userInterface = new ConsoleObserver(this, battle);
+    }
+
     public String[] getAllCharactersName() {
         return FactoryCharacters.getAllCharactersName();
     }
 
     public void fight(UserInterface frame) {
-        Battle battle = new Battle();
-        ListenerEntryToConsole listener = new ListenerEntryToConsole();
-        BattleDisplay battleDisplay = new BattleDisplay(listener, frame.getConsoleText());
-
+        frame.getConsoleText().setText(null);
         String nameSquad = frame.getNameSquadFirst().getText();
         String listSquad = frame.getListSquadFirst().getText();
         battle.newSquads(nameSquad, getListPerson(listSquad, nameSquad));
@@ -29,7 +33,7 @@ public class UserInterfaceController {
         listSquad = frame.getListSquadSecond().getText();
         battle.newSquads(nameSquad, getListPerson(listSquad, nameSquad));
 
-        battle.battleProgress(listener);
+        battle.battleProgress();
     }
 
     private List<InfoAboutPerson> getListPerson(String personsText, String nameSquad) {

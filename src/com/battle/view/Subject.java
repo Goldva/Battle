@@ -1,4 +1,4 @@
-package com.battle.pattern.observer;
+package com.battle.view;
 
 public interface Subject {
     void registerObserver(Observer o);

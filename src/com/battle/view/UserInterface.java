@@ -1,4 +1,4 @@
-package com.battle;
+package com.battle.view;
 
 import com.battle.controlers.UserInterfaceController;
 
@@ -6,19 +6,19 @@ import javax.swing.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-public class UserInterface extends JFrame {
+public class UserInterface extends JFrame{
     private UserInterfaceController controller;
     private JTextField nameSquadFirst;
     private JTextField nameSquadSecond;
     private JTextField warriorName;
     private JTextArea listSquadFirst;
     private JTextArea listSquadSecond;
-    private JTextArea consoleText;
+    JTextArea consoleText;
     private JComboBox<String> characters;
 
-    public UserInterface() {
+    public UserInterface(UserInterfaceController controller) {
         super("Битва");
-        controller = new UserInterfaceController();
+        this.controller = controller;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(640, 480);
         addComponentToPane();
@@ -26,9 +26,6 @@ public class UserInterface extends JFrame {
         setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new UserInterface();
-    }
 
     public void addComponentToPane() {
         nameSquadFirst = getTextField("Введите имя 1-ого отряда");
@@ -163,4 +160,5 @@ public class UserInterface extends JFrame {
     public JComboBox<String> getCharacters() {
         return characters;
     }
+
 }

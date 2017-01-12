@@ -1,4 +1,4 @@
-package com.battle.pattern.factory;
+package com.battle.warriors;
 
 import com.battle.data.InfoAboutPerson;
 import com.battle.warriors.Archer;
