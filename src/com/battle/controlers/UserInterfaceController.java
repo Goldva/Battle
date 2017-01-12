@@ -4,7 +4,7 @@ import com.battle.view.UserInterface;
 import com.battle.data.InfoAboutPerson;
 import com.battle.warriors.FactoryCharacters;
 import com.battle.view.ConsoleObserver;
-import com.battle.utils.Battle;
+import com.battle.Utils.Battle;
 
 import java.util.ArrayList;
 import java.util.List;

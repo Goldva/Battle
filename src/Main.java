@@ -1,5 +1,5 @@
 import com.battle.controlers.UserInterfaceController;
-import com.battle.utils.Battle;
+import com.battle.Utils.Battle;
 
 public class Main {
     public static void main(String[] args) {

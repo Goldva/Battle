@@ -1,7 +1,7 @@
 package com.battle.view;
 
 import com.battle.controlers.UserInterfaceController;
-import com.battle.utils.Battle;
+import com.battle.Utils.Battle;
 
 public class ConsoleObserver implements Observer {
     private UserInterface userInterface;
