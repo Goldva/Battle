@@ -38,7 +38,7 @@ public class UserInterface extends JFrame {
         listSquadFirst = getTextArea();
         listSquadSecond = getTextArea();
         consoleText = getTextArea();
-
+        JScrollPane scrollConsoleText = new JScrollPane(consoleText);
         characters = getComboBox();
 
         JButton addToFirstSquadButton = getBtnAddWarrior("Добавить в 1-ый отряд", listSquadFirst);
@@ -53,7 +53,7 @@ public class UserInterface extends JFrame {
 
         layout.setHorizontalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(consoleText)
+                        .addComponent(scrollConsoleText)
                         .addComponent(fightButton)
                         .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -71,7 +71,7 @@ public class UserInterface extends JFrame {
 
         layout.setVerticalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(consoleText))
+                        .addComponent(scrollConsoleText))
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(fightButton))
                 .addGroup(layout.createSequentialGroup()
