@@ -14,6 +14,6 @@ public class Warrior extends Character {
 
     @Override
     public int attack() {
-        return random.nextInt(myDamage + 11);
+        return random.nextInt(myDamage + 29) + 40;
     }
 }

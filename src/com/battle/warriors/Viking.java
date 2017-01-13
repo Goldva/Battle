@@ -8,13 +8,13 @@ public class Viking extends Character {
         this.myName = myName;
         this.myDamage = 120;
         this.myHealth = 100;
-        this.random = new Random(this.myDamage - 20);
+        this.random = new Random();
         this.squadName = squadName;
     }
 
     @Override
     public int attack() {
-        return random.nextInt(myDamage + 21);
+        return random.nextInt(myDamage - 79) + 100;
     }
 
 }
