@@ -1,24 +1,24 @@
 package com.battle.Utils;
 
 import com.battle.Squad;
-import com.battle.data.InfoAboutPerson;
-import com.battle.warriors.FactoryCharacters;
 import com.battle.view.Observer;
 import com.battle.view.Subject;
 import com.battle.warriors.Character;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Battle implements Subject{
     private List<Observer> observers;
     private String newText;
-    private List<Squad> squads;
+    private Map<String, Squad> squads;
     private DateHelper dateHelper;
 
     public Battle() {
         this.observers = new ArrayList<>();
-        squads = new ArrayList<>();
+        squads = new HashMap<>();
         dateHelper = new DateHelper();
     }
 
@@ -36,39 +36,48 @@ public class Battle implements Subject{
                 damage, soldierTwo.getMyName(), soldierTwo.getSquadName());
     }
 
-    public void battleProgress() {
-        String statusBattle = "Начало поединка " + getDateHelper().getFormattedStartDate() + "\n";
-        setNewTextForConsole(statusBattle);
+    public void battleProgress(String squadNameFirst, String squadNameSecond) {
+        try {
+            String statusBattle = "Начало поединка " + getDateHelper().getFormattedStartDate() + "\n";
+            setNewTextForConsole(statusBattle);
+            Squad squadFirst = squads.get(squadNameFirst).clone();
+            Squad squadSecond = squads.get(squadNameSecond).clone();
 
-        boolean queueAttack = true;
-        while (squads.get(0).hasAliveWarriors() && squads.get(1).hasAliveWarriors()) {
-            if (queueAttack) {
-                statusBattle = battleSoldiers(squads.get(0).getRandomWarrior(), squads.get(1).getRandomWarrior());
-                queueAttack = false;
-            } else {
-                statusBattle = battleSoldiers(squads.get(1).getRandomWarrior(), squads.get(0).getRandomWarrior());
-                queueAttack = true;
+            boolean queueAttack = true;
+            while (squadFirst.hasAliveWarriors() && squadSecond.hasAliveWarriors()) {
+                if (queueAttack) {
+                    statusBattle = battleSoldiers(squadFirst.getRandomWarrior(), squadSecond.getRandomWarrior());
+                    queueAttack = false;
+                } else {
+                    statusBattle = battleSoldiers(squadSecond.getRandomWarrior(), squadFirst.getRandomWarrior());
+                    queueAttack = true;
+                }
+                setNewTextForConsole(statusBattle + "\n");
+                dateHelper.skipTime();
             }
+
+            if (squadFirst.hasAliveWarriors())
+                statusBattle = "Победил " + squadFirst.toString();
+            else
+                statusBattle = "Победил " + squadSecond.toString();
+
             setNewTextForConsole(statusBattle + "\n");
-            dateHelper.skipTime();
+            setNewTextForConsole(getDateHelper().getFormattedDiff() + "\n");
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
         }
 
-        if (squads.get(0).hasAliveWarriors())
-            statusBattle = "Победил " + squads.get(0).toString();
-        else
-            statusBattle = "Победил " + squads.get(1).toString();
-
-        setNewTextForConsole(statusBattle + "\n");
-        setNewTextForConsole(getDateHelper().getFormattedDiff() + "\n");
-        squads.clear();
     }
 
-    public void newSquads(String nameSquad,  List<InfoAboutPerson> warriors) {
-        List<Character> squad = new ArrayList<>();
-        for (InfoAboutPerson warrior : warriors) {
-            squad.add(FactoryCharacters.createCharacter(warrior));
-        }
-        squads.add(new Squad(nameSquad, squad));
+    public void addCharacter(Character character) {
+        String squadName = character.getSquadName();
+        if (!squads.containsKey(squadName))
+            newSquads(squadName);
+        squads.get(squadName).addWarriors(character);
+    }
+
+    public void newSquads(String nameSquad) {
+        squads.put(nameSquad, new Squad(nameSquad));
     }
 
     public DateHelper getDateHelper() {

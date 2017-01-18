@@ -1,23 +1,25 @@
 package com.battle.view;
 
+import com.battle.Utils.Battle;
 import com.battle.controlers.UserInterfaceController;
 
 import javax.swing.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-public class UserInterface extends JFrame{
+public class UserInterface extends JFrame implements Observer {
     private UserInterfaceController controller;
-    private JTextField nameSquadFirst;
-    private JTextField nameSquadSecond;
-    private JTextField warriorName;
-    private JTextArea listSquadFirst;
-    private JTextArea listSquadSecond;
+    JTextField nameSquadFirst;
+    JTextField nameSquadSecond;
+    JTextField warriorName;
+    JTextArea listSquadFirst;
+    JTextArea listSquadSecond;
     JTextArea consoleText;
-    private JComboBox<String> characters;
+    JComboBox<String> characters;
 
-    public UserInterface(UserInterfaceController controller) {
+    public UserInterface(UserInterfaceController controller, Battle battle) {
         super("Битва");
+        battle.registerObserver(this);
         this.controller = controller;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(640, 480);
@@ -38,8 +40,8 @@ public class UserInterface extends JFrame{
         JScrollPane scrollConsoleText = new JScrollPane(consoleText);
         characters = getComboBox();
 
-        JButton addToFirstSquadButton = getBtnAddWarrior("Добавить в 1-ый отряд", listSquadFirst);
-        JButton addToSecondSquadButton = getBtnAddWarrior("Добавить во 2-ой отряд", listSquadSecond);
+        JButton addToFirstSquadButton = getBtnAddWarrior("Добавить в 1-ый отряд", listSquadFirst, nameSquadFirst);
+        JButton addToSecondSquadButton = getBtnAddWarrior("Добавить во 2-ой отряд", listSquadSecond, nameSquadSecond);
         JButton fightButton = getBtnFight("В бой!");
 
 
@@ -117,19 +119,15 @@ public class UserInterface extends JFrame{
         return textArea;
     }
 
-    private JButton getBtnAddWarrior(String nameBtn, JTextArea listSquad) {
+    private JButton getBtnAddWarrior(String nameBtn, JTextArea listSquad, JTextField nameSquad) {
         JButton btn = new JButton(nameBtn);
-        btn.addActionListener(e -> {
-            String character = characters.getSelectedItem().toString();
-            String name = warriorName.getText();
-            listSquad.append(character + " - " + name + "\n");
-        });
+        btn.addActionListener(e -> controller.addCharacter(nameSquad.getText(), listSquad));
         return btn;
     }
 
     private JButton getBtnFight(String nameBtn) {
         JButton btn = new JButton(nameBtn);
-        btn.addActionListener(e -> controller.fight(this));
+        btn.addActionListener(e -> controller.fight(nameSquadFirst.getText(), nameSquadSecond.getText()));
         return btn;
     }
 
@@ -161,4 +159,8 @@ public class UserInterface extends JFrame{
         return characters;
     }
 
+    @Override
+    public void update(String text) {
+        consoleText.append(text);
+    }
 }

@@ -1,52 +1,42 @@
 package com.battle.controlers;
 
-import com.battle.view.UserInterface;
-import com.battle.data.InfoAboutPerson;
-import com.battle.warriors.FactoryCharacters;
-import com.battle.view.ConsoleObserver;
 import com.battle.Utils.Battle;
+import com.battle.view.UserInterface;
+import com.battle.warriors.Character;
+import com.battle.warriors.FactoryCharacters;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.swing.*;
 
 public class UserInterfaceController {
 
     private Battle battle;
-    private ConsoleObserver userInterface;
+    private UserInterface userInterface;
 
     public UserInterfaceController(Battle battle) {
         this.battle = battle;
-        userInterface = new ConsoleObserver(this, battle);
+        userInterface = new UserInterface(this, battle);
     }
 
     public String[] getAllCharactersName() {
         return FactoryCharacters.getAllCharactersName();
     }
 
-    public void fight(UserInterface frame) {
-        frame.getConsoleText().setText(null);
-        String nameSquad = frame.getNameSquadFirst().getText();
-        String listSquad = frame.getListSquadFirst().getText();
-        battle.newSquads(nameSquad, getListPerson(listSquad, nameSquad));
+    public void addCharacter(String nameSquad, JTextArea listSquad) {
+        String character = userInterface.getCharacters().getSelectedItem().toString();
+        String name = userInterface.getWarriorName().getText();
+        listSquad.append(character + " - " + name + "\n");
 
-        nameSquad = frame.getNameSquadSecond().getText();
-        listSquad = frame.getListSquadSecond().getText();
-        battle.newSquads(nameSquad, getListPerson(listSquad, nameSquad));
-
-        battle.battleProgress();
+        Character soldier = FactoryCharacters.createCharacter(character);
+        assert soldier != null;
+        soldier.setSquadName(nameSquad);
+        soldier.setMyName(name);
+        battle.addCharacter(soldier);
     }
 
-    private List<InfoAboutPerson> getListPerson(String personsText, String nameSquad) {
-        List<InfoAboutPerson> listPersons = new ArrayList<>();
-        String[] persons = personsText.split("\n");
-        for (String person : persons) {
-            InfoAboutPerson info = new InfoAboutPerson();
-            info.setCharacterPerson(person.split(" - ")[0]);
-            info.setNamePerson(person.split(" - ")[1]);
-            info.setNameSquad(nameSquad);
-            listPersons.add(info);
-        }
-        return listPersons;
+    public void fight(String squadFirst, String squadSecond) {
+        userInterface.getConsoleText().setText(null);
+        battle.battleProgress(squadFirst, squadSecond);
+
     }
 
 }

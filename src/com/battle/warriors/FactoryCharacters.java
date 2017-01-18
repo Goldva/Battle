@@ -1,19 +1,13 @@
 package com.battle.warriors;
 
-import com.battle.data.InfoAboutPerson;
-import com.battle.warriors.Archer;
-import com.battle.warriors.Character;
-import com.battle.warriors.Viking;
-import com.battle.warriors.Warrior;
-
 public class FactoryCharacters {
-    public static Character createCharacter(InfoAboutPerson info) {
-        if ("Archer".equals(info.getCharacterPerson())) {
-            return new Archer(info.getNamePerson(), info.getNameSquad());
-        } else if ("Viking".equals(info.getCharacterPerson())) {
-            return new Viking(info.getNamePerson(), info.getNameSquad());
-        } else if ("Warrior".equals(info.getCharacterPerson())) {
-            return new Warrior(info.getNamePerson(), info.getNameSquad());
+    public static Character createCharacter(String character) {
+        if ("Archer".equals(character)) {
+            return new Archer();
+        } else if ("Viking".equals(character)) {
+            return new Viking();
+        } else if ("Warrior".equals(character)) {
+            return new Warrior();
         }
         return null;
     }

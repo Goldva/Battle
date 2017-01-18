@@ -4,12 +4,10 @@ import java.util.Random;
 
 public class Viking extends Character {
 
-    public Viking(String myName, String squadName) {
-        this.myName = myName;
+    public Viking() {
         this.myDamage = 120;
         this.myHealth = 100;
         this.random = new Random();
-        this.squadName = squadName;
     }
 
     @Override

@@ -17,8 +17,12 @@ public class Squad implements Cloneable {
         this.listSquads = listSquads;
     }
 
-    private void addWarriors(Character warrior) {
-        warrior.setSquadName(this.squadName);
+    public Squad(String squadName) {
+        this.squadName = squadName;
+    }
+
+    public void addWarriors(Character warrior) {
+//        warrior.setSquadName(this.squadName);
         this.listSquads.add(warrior);
     }
 
@@ -45,6 +49,10 @@ public class Squad implements Cloneable {
     }
 
 
+    public void newSquadList() {
+        listSquads = new ArrayList<>();
+    }
+
     @Override
     public String toString() {
         return "Отряд: " + squadName;
@@ -54,6 +62,7 @@ public class Squad implements Cloneable {
     public Squad clone() throws CloneNotSupportedException {
         Squad newSquad = (Squad) super.clone();
 
+        newSquad.newSquadList();
         for (Character soldier : this.listSquads) {
             Character character = (Character) soldier.clone();
             character.setSquadName(newSquad.getSquadName());

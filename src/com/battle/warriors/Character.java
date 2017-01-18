@@ -37,6 +37,10 @@ public abstract class Character implements Cloneable {
         return myName;
     }
 
+    public void setMyName(String myName) {
+        this.myName = myName;
+    }
+
     public String getSquadName() {
         return squadName;
     }
