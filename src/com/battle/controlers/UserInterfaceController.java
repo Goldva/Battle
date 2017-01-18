@@ -23,20 +23,20 @@ public class UserInterfaceController {
         return FactoryCharacters.getAllCharactersName();
     }
 
-    public void fight(UserInterface frame) {
+    public void fight(UserInterface frame) { //из-за странной прослойки в виде ConsoleObserver контроллеру приходится передавать представление, хотя контроллер по-сути его и создал
         frame.getConsoleText().setText(null);
         String nameSquad = frame.getNameSquadFirst().getText();
         String listSquad = frame.getListSquadFirst().getText();
         battle.newSquads(nameSquad, getListPerson(listSquad, nameSquad));
 
-        nameSquad = frame.getNameSquadSecond().getText();
+        nameSquad = frame.getNameSquadSecond().getText(); //дублирование
         listSquad = frame.getListSquadSecond().getText();
         battle.newSquads(nameSquad, getListPerson(listSquad, nameSquad));
 
         battle.battleProgress();
     }
 
-    private List<InfoAboutPerson> getListPerson(String personsText, String nameSquad) {
+    private List<InfoAboutPerson> getListPerson(String personsText, String nameSquad) { //зачем парсить текстовый список, вместо того чтобы добавлять бойцов сразу по нажатию кнопки?
         List<InfoAboutPerson> listPersons = new ArrayList<>();
         String[] persons = personsText.split("\n");
         for (String person : persons) {
