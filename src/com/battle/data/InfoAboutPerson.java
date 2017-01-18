@@ -1,6 +1,6 @@
 package com.battle.data;
 
-public class InfoAboutPerson {
+public class InfoAboutPerson { //вся нужная информация уже есть в классе бойца. зачем хранить еще здесь?
     private String characterPerson;
     private String namePerson;
     private String nameSquad;
